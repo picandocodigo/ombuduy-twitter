@@ -1,0 +1,15 @@
+api_host : 'http://ombuduy.com' 
+api_www  : 'http://ombuduy.com' 
+
+twitter:
+  consumer_key       : 'XXX'
+  consumer_secret    : 'XXXXXXX'
+  oauth_token        : 'xxxxxxxxxxxxx'
+  oauth_token_secret : 'XXXXXXXXXXXXXXXXXXXXXX'
+  hashtags           : [ '#ombuduy',]
+
+sidekiq:
+  namespace : 'ombud-twitter'
+  webuser   : 'user'
+  webpass   : 'pass'
+  url       : 'redis://127.0.0.1:6379/1'
