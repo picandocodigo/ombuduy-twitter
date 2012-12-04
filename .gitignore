@@ -16,3 +16,9 @@ tmp
 .yardoc
 _yardoc
 doc/
+*.swp
+*.swo
+
+config.yml
+*.pid
+*.output
