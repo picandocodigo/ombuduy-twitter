@@ -21,14 +21,23 @@ TweetStream.configure do |c|
   c.auth_method        = :oauth
 end
 
+require 'sidekiq'
+require './workers/new_tweet'
+require './workers/reply_tweet'
+require './workers/retweet'
+
+
 TweetStream::Daemon.new('feeder', :log_output => true, :multiple => true).track(config['twitter']['hashtags']) do |status|
   unless status.attrs[:user][:screen_name] == 'ombuduy' 
     if status.attrs[:retweeted_status] 
       puts 'es un retweet'
+      Retweet.perform_async(status)
     elsif status.attrs[:in_reply_to_status_id_str] 
       puts 'es un reply'
+      NewTweet.perform_async(status)
     else 
       puts 'es uno nuevo'
+      ReplyTweet.perform_async(status)
     end
    end
 end
