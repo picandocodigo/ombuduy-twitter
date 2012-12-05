@@ -2,6 +2,8 @@ require 'sidekiq'
 require 'yaml'
 
 require './workers/new_tweet'
+require './workers/reply_tweet'
+require './workers/retweet'
 
 config = YAML.load_file('config.yml')
 
